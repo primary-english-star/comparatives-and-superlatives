@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quest: Comparative & Superlative Master</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#6C5CE7',
+                            pink: '#FD79A8',
+                            yellow: '#FDCB6E',
+                            green: '#00B894',
+                            blue: '#0984E3',
+                            orange: '#E17055',
+                            dark: '#2D3436'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka One', 'cursive'],
+                        body: ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+            min-height: 100vh;
+            user-select: none;
+        }
+        .font-heading {
+            font-family: 'Fredoka One', cursive;
+        }
+        .bounce-gentle {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .pop-in {
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-3d {
+            transition: all 0.1s ease;
+            box-shadow: 0 6px 0 0 rgba(0,0,0,0.25);
+        }
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 0 rgba(0,0,0,0.25);
+        }
+        /* Custom scrollbar for desktop review table */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 p-2 sm:p-4">
+
+    <!-- Top Navigation Header -->
+    <header class="max-w-5xl w-full mx-auto bg-white/90 backdrop-blur-md rounded-2xl p-3 sm:p-4 mb-4 flex justify-between items-center shadow-lg border-2 border-white/50">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('mode-select')">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-brand-purple rounded-2xl flex items-center justify-center text-white text-xl sm:text-2xl shadow-md transform -rotate-3">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div>
+                <h1 class="font-heading text-lg sm:text-2xl text-brand-purple tracking-wide leading-tight">Grammar Quest</h1>
+                <p class="text-xs text-slate-500 font-bold hidden sm:block">Primary 4: Comparatives & Superlatives</p>
+            </div>
+        </div>
+
+        <!-- Global Player Info Stats Bar -->
+        <div class="flex items-center space-x-3 sm:space-x-5">
+            <div class="flex items-center bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-full shadow-sm">
+                <i class="fa-solid fa-star text-amber-500 text-lg mr-1.5 animate-pulse"></i>
+                <span id="global-score" class="font-heading text-amber-800 text-sm sm:text-base">0</span>
+            </div>
+            <div class="flex items-center bg-rose-100 border border-rose-300 px-3 py-1.5 rounded-full shadow-sm">
+                <i class="fa-solid fa-fire text-rose-500 text-lg mr-1.5"></i>
+                <span id="global-streak" class="font-heading text-rose-800 text-sm sm:text-base">0x</span>
+            </div>
+            <button onclick="toggleAudio()" id="audio-btn" class="w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-volume-high text-sm"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-5xl w-full mx-auto flex-grow flex flex-col justify-center">
+
+        <!-- ================= 1. MODE & LEVEL SELECT SCREEN ================= -->
+        <div id="screen-mode-select" class="pop-in space-y-6 my-auto">
+            <div class="text-center text-white space-y-2">
+                <h2 class="font-heading text-3xl sm:text-5xl drop-shadow-md">Choose Your Game Mode!</h2>
+                <p class="text-sm sm:text-lg text-indigo-100 font-semibold max-w-xl mx-auto">Master adjectives from short forms to long syllable rules & irregulars!</p>
+            </div>
+
+            <!-- Level Selector Bar -->
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-white/40">
+                <h3 class="text-center font-heading text-slate-700 text-sm sm:text-base mb-3 uppercase tracking-wider">
+                    <i class="fa-solid fa-layer-group text-brand-purple mr-2"></i> Select Vocabulary Level:
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3" id="level-buttons-container">
+                    <!-- Dynamic Level Buttons injected by JS -->
+                </div>
+            </div>
+
+            <!-- Game Mode Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                <!-- Mode 1: Grammar Quest -->
+                <div class="bg-white rounded-3xl p-6 card-shadow border-4 border-brand-purple flex flex-col justify-between hover:scale-[1.02] transition-transform duration-200 group">
+                    <div>
+                        <div class="w-16 h-16 bg-purple-100 text-brand-purple rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:rotate-6 transition-transform">
+                            <i class="fa-solid fa-chess-knight"></i>
+                        </div>
+                        <span class="bg-purple-100 text-brand-purple text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Quiz & MCQ</span>
+                        <h3 class="font-heading text-2xl text-slate-800 mt-2 mb-2">Tower Challenge</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Climb the grammar tower! Answer multiple choice and fill-in questions before time runs out.</p>
+                    </div>
+                    <button onclick="startGame('quest')" class="w-full bg-brand-purple hover:bg-purple-600 text-white font-heading py-3 px-4 rounded-xl text-lg btn-3d flex items-center justify-center space-x-2">
+                        <span>Play Tower Quest</span>
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mode 2: Word Builder -->
+                <div class="bg-white rounded-3xl p-6 card-shadow border-4 border-brand-green flex flex-col justify-between hover:scale-[1.02] transition-transform duration-200 group">
+                    <div>
+                        <div class="w-16 h-16 bg-emerald-100 text-brand-green rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:rotate-6 transition-transform">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <span class="bg-emerald-100 text-brand-green text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Drag & Match</span>
+                        <h3 class="font-heading text-2xl text-slate-800 mt-2 mb-2">Adjective Builder</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Match base adjectives with their correct comparative (-er/more) and superlative (-est/most) forms!</p>
+                    </div>
+                    <button onclick="startGame('builder')" class="w-full bg-brand-green hover:bg-emerald-600 text-white font-heading py-3 px-4 rounded-xl text-lg btn-3d flex items-center justify-center space-x-2">
+                        <span>Play Builder</span>
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mode 3: Sentence Corrector -->
+                <div class="bg-white rounded-3xl p-6 card-shadow border-4 border-brand-orange flex flex-col justify-between hover:scale-[1.02] transition-transform duration-200 group">
+                    <div>
+                        <div class="w-16 h-16 bg-orange-100 text-brand-orange rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:rotate-6 transition-transform">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <span class="bg-orange-100 text-brand-orange text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Fast-Paced Blitz</span>
+                        <h3 class="font-heading text-2xl text-slate-800 mt-2 mb-2">Sentence Blitz</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">Spot the correct grammar! Fast decision-making: select which sentence is written correctly.</p>
+                    </div>
+                    <button onclick="startGame('sentence')" class="w-full bg-brand-orange hover:bg-orange-600 text-white font-heading py-3 px-4 rounded-xl text-lg btn-3d flex items-center justify-center space-x-2">
+                        <span>Play Sentence Blitz</span>
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Revision Table Reference Button -->
+            <div class="text-center pt-2">
+                <button onclick="openGrammarBank()" class="inline-flex items-center space-x-2 bg-white/80 hover:bg-white text-slate-700 px-5 py-2.5 rounded-2xl font-bold shadow-md transition text-sm">
+                    <i class="fa-solid fa-book-open text-brand-blue"></i>
+                    <span>Open P4 Grammar Rules & Study List</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= 2. GAMEPLAY CONTAINER ================= -->
+        <div id="screen-game" class="hidden pop-in space-y-4 my-auto">
+            
+            <!-- Game Status Top Bar -->
+            <div class="bg-white rounded-2xl p-4 card-shadow flex flex-wrap justify-between items-center gap-2">
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button onclick="showScreen('mode-select')" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm flex items-center">
+                        <i class="fa-solid fa-arrow-left mr-1.5"></i> Menu
+                    </button>
+                    <span id="game-mode-badge" class="bg-purple-100 text-brand-purple font-extrabold text-xs px-3 py-1 rounded-full">Tower Quest</span>
+                    <span id="game-level-badge" class="bg-blue-100 text-brand-blue font-extrabold text-xs px-3 py-1 rounded-full">Level 1</span>
+                </div>
+
+                <!-- Lives System & Timer -->
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <!-- Lives -->
+                    <div class="flex items-center space-x-1" id="lives-container">
+                        <i class="fa-solid fa-heart text-rose-500 text-lg"></i>
+                        <i class="fa-solid fa-heart text-rose-500 text-lg"></i>
+                        <i class="fa-solid fa-heart text-rose-500 text-lg"></i>
+                    </div>
+                    <!-- Question Counter -->
+                    <div class="text-sm font-bold text-slate-500">
+                        Q: <span id="current-q-num" class="text-slate-800 font-heading">1</span>/<span id="total-q-num">10</span>
+                    </div>
+                    <!-- Timer Bar Container -->
+                    <div class="w-24 sm:w-32 bg-slate-200 h-3 rounded-full overflow-hidden">
+                        <div id="timer-bar" class="bg-brand-green h-full w-full transition-all duration-100"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Play Area (Injected via JS) -->
+            <div id="play-area" class="bg-white rounded-3xl p-4 sm:p-8 card-shadow border-4 border-white/60 min-h-[360px] flex flex-col justify-center">
+                <!-- Game layout rendered here -->
+            </div>
+
+            <!-- Mascot & Feedback Toast -->
+            <div id="feedback-toast" class="hidden bg-emerald-500 text-white rounded-2xl p-4 card-shadow flex items-start space-x-3 transition-all">
+                <div class="text-3xl" id="feedback-icon">🎉</div>
+                <div class="flex-grow">
+                    <h4 class="font-heading text-lg" id="feedback-title">Awesome Job!</h4>
+                    <p class="text-sm opacity-95" id="feedback-msg">That's the correct form!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 3. SUMMARY & RESULTS SCREEN ================= -->
+        <div id="screen-summary" class="hidden pop-in space-y-6 my-auto max-w-2xl mx-auto w-full">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 card-shadow text-center space-y-6 border-4 border-amber-300">
+                <div class="inline-block p-4 bg-amber-100 text-amber-500 rounded-full text-4xl bounce-gentle mb-2">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <h2 class="font-heading text-3xl sm:text-4xl text-slate-800">Quest Completed!</h2>
+                    <p class="text-slate-500 font-semibold text-sm">Here is your overall grammar rating!</p>
+                </div>
+
+                <!-- Stars Rating -->
+                <div class="flex justify-center space-x-2 text-3xl sm:text-4xl text-amber-400" id="stars-result">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <!-- Score Grid -->
+                <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase font-bold">Total Score</div>
+                        <div class="font-heading text-2xl text-brand-purple" id="summary-score">0</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase font-bold">Accuracy</div>
+                        <div class="font-heading text-2xl text-brand-green" id="summary-accuracy">0%</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase font-bold">Best Streak</div>
+                        <div class="font-heading text-2xl text-brand-orange" id="summary-streak">0x</div>
+                    </div>
+                </div>
+
+                <!-- Mistakes Review Accordion -->
+                <div class="text-left">
+                    <h3 class="font-heading text-slate-700 text-sm uppercase mb-2 flex items-center justify-between">
+                        <span><i class="fa-solid fa-list-check mr-2 text-brand-blue"></i> Questions Review</span>
+                        <span id="review-count-badge" class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">0 Mistakes</span>
+                    </h3>
+                    <div id="review-list" class="max-h-48 overflow-y-auto space-y-2 pr-1">
+                        <!-- Review items generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="startGame(state.currentMode)" class="flex-1 bg-brand-green hover:bg-emerald-600 text-white font-heading py-3 px-4 rounded-xl btn-3d">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Play Again
+                    </button>
+                    <button onclick="showScreen('mode-select')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-heading py-3 px-4 rounded-xl border border-slate-300">
+                        <i class="fa-solid fa-house mr-2"></i> Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ================= GRAMMAR BANK MODAL ================= -->
+    <div id="modal-grammar" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] flex flex-col card-shadow overflow-hidden pop-in">
+            <!-- Modal Header -->
+            <div class="p-4 sm:p-6 bg-brand-purple text-white flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-book-open text-2xl"></i>
+                    <h3 class="font-heading text-xl sm:text-2xl">Primary 4 Adjective Rules</h3>
+                </div>
+                <button onclick="closeGrammarBank()" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content - Scrollable Rules Table -->
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-6 text-sm">
+                <!-- Rule 1 -->
+                <div class="border-b pb-4">
+                    <span class="bg-purple-100 text-brand-purple font-bold text-xs px-2.5 py-1 rounded-md">Category A</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Short Adjectives (+er / +est)</h4>
+                    <p class="text-slate-600 mt-1">Add <b>-er than</b> for comparative and <b>the ...-est</b> for superlative.</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> cheap &rarr; cheaper than &rarr; the cheapest | tall &rarr; taller than &rarr; the tallest</p>
+                </div>
+
+                <!-- Rule 2 -->
+                <div class="border-b pb-4">
+                    <span class="bg-blue-100 text-brand-blue font-bold text-xs px-2.5 py-1 rounded-md">Category B</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Ending in -e (+r / +st)</h4>
+                    <p class="text-slate-600 mt-1">Just add <b>-r than</b> or <b>the ...-st</b>.</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> brave &rarr; braver than &rarr; the bravest | cute &rarr; cuter than &rarr; the cutest</p>
+                </div>
+
+                <!-- Rule 3 -->
+                <div class="border-b pb-4">
+                    <span class="bg-amber-100 text-amber-700 font-bold text-xs px-2.5 py-1 rounded-md">Category C</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Double Final Consonant</h4>
+                    <p class="text-slate-600 mt-1">Short vowel + single consonant &rarr; double the last letter!</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> big &rarr; bigger than &rarr; the biggest | hot &rarr; hotter than &rarr; the hottest | thin &rarr; thinner than &rarr; the thinnest</p>
+                </div>
+
+                <!-- Rule 4 -->
+                <div class="border-b pb-4">
+                    <span class="bg-rose-100 text-rose-700 font-bold text-xs px-2.5 py-1 rounded-md">Category D</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Ending in -y (&rarr; -ier / -iest)</h4>
+                    <p class="text-slate-600 mt-1">Change <b>-y</b> into <b>-ier than</b> or <b>the ...-iest</b>.</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> happy &rarr; happier than &rarr; the happiest | dirty &rarr; dirtier than &rarr; the dirtiest</p>
+                </div>
+
+                <!-- Rule 5 -->
+                <div class="border-b pb-4">
+                    <span class="bg-emerald-100 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-md">Category E</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Long Adjectives (2-syllables non -y / 3+ syllables)</h4>
+                    <p class="text-slate-600 mt-1">Use <b>more ... than</b> or <b>the most ...</b> before the adjective!</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> beautiful &rarr; more beautiful than &rarr; the most beautiful | dangerous &rarr; more dangerous than &rarr; the most dangerous</p>
+                </div>
+
+                <!-- Rule 6 -->
+                <div>
+                    <span class="bg-orange-100 text-orange-700 font-bold text-xs px-2.5 py-1 rounded-md">Category F</span>
+                    <h4 class="font-heading text-slate-800 text-base mt-1">Irregular Adjectives</h4>
+                    <p class="text-slate-600 mt-1">Special forms that change completely!</p>
+                    <p class="text-xs text-slate-500 mt-1"><i>Examples:</i> good &rarr; better than &rarr; the best | bad &rarr; worse than &rarr; the worst</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-100 border-t text-center">
+                <button onclick="closeGrammarBank()" class="bg-brand-purple text-white font-heading px-6 py-2.5 rounded-xl btn-3d">
+                    Got It! Let's Play
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT GAME LOGIC ================= -->
+    <script>
+        /* ----------------------------------------------------
+           1. VOCABULARY DATABASE (Derived directly from doc)
+        ---------------------------------------------------- */
+        const VOCAB_DATABASE = {
+            // Level 1: Short & Simple (-er/-est, -e endings)
+            level1: [
+                { base: "cheap", comp: "cheaper than", sup: "the cheapest", category: "short" },
+                { base: "quick", comp: "quicker than", sup: "the quickest", category: "short" },
+                { base: "clean", comp: "cleaner than", sup: "the cleanest", category: "short" },
+                { base: "rich", comp: "richer than", sup: "the richest", category: "short" },
+                { base: "clever", comp: "cleverer than", sup: "the cleverest", category: "short" },
+                { base: "short", comp: "shorter than", sup: "the shortest", category: "short" },
+                { base: "cold", comp: "colder than", sup: "the coldest", category: "short" },
+                { base: "slow", comp: "slower than", sup: "the slowest", category: "short" },
+                { base: "small", comp: "smaller than", sup: "the smallest", category: "short" },
+                { base: "tall", comp: "taller than", sup: "the tallest", category: "short" },
+                { base: "young", comp: "younger than", sup: "the youngest", category: "short" },
+                { base: "old", comp: "older than", sup: "the oldest", category: "short" },
+                { base: "brave", comp: "braver than", sup: "the bravest", category: "ending-e" },
+                { base: "cute", comp: "cuter than", sup: "the cutest", category: "ending-e" },
+                { base: "fierce", comp: "fiercer than", sup: "the fiercest", category: "ending-e" },
+                { base: "wide", comp: "wider than", sup: "the widest", category: "ending-e" }
+            ],
+            // Level 2: Double Final Consonant & -y Endings
+            level2: [
+                { base: "big", comp: "bigger than", sup: "the biggest", category: "double-consonant" },
+                { base: "fat", comp: "fatter than", sup: "the fattest", category: "double-consonant" },
+                { base: "hot", comp: "hotter than", sup: "the hottest", category: "double-consonant" },
+                { base: "sad", comp: "sadder than", sup: "the saddest", category: "double-consonant" },
+                { base: "thin", comp: "thinner than", sup: "the thinnest", category: "double-consonant" },
+                { base: "dirty", comp: "dirtier than", sup: "the dirtiest", category: "ending-y" },
+                { base: "easy", comp: "easier than", sup: "the easiest", category: "ending-y" },
+                { base: "happy", comp: "happier than", sup: "the happiest", category: "ending-y" },
+                { base: "healthy", comp: "healthier than", sup: "the healthiest", category: "ending-y" },
+                { base: "heavy", comp: "heavier than", sup: "the heaviest", category: "ending-y" },
+                { base: "lazy", comp: "lazier than", sup: "the laziest", category: "ending-y" },
+                { base: "naughty", comp: "naughtier than", sup: "the naughtiest", category: "ending-y" },
+                { base: "pretty", comp: "prettier than", sup: "the prettiest", category: "ending-y" },
+                { base: "tidy", comp: "tidier than", sup: "the tidiest", category: "ending-y" }
+            ],
+            // Level 3: Long Adjectives (more/most) & Irregulars
+            level3: [
+                { base: "beautiful", comp: "more beautiful than", sup: "the most beautiful", category: "long" },
+                { base: "comfortable", comp: "more comfortable than", sup: "the most comfortable", category: "long" },
+                { base: "dangerous", comp: "more dangerous than", sup: "the most dangerous", category: "long" },
+                { base: "delicious", comp: "more delicious than", sup: "the most delicious", category: "long" },
+                { base: "difficult", comp: "more difficult than", sup: "the most difficult", category: "long" },
+                { base: "exciting", comp: "more exciting than", sup: "the most exciting", category: "long" },
+                { base: "expensive", comp: "more expensive than", sup: "the most expensive", category: "long" },
+                { base: "hard-working", comp: "more hard-working than", sup: "the most hard-working", category: "long" },
+                { base: "interesting", comp: "more interesting than", sup: "the most interesting", category: "long" },
+                { base: "famous", comp: "more famous than", sup: "the most famous", category: "long" },
+                { base: "helpful", comp: "more helpful than", sup: "the most helpful", category: "long" },
+                { base: "good", comp: "better than", sup: "the best", category: "irregular" },
+                { base: "bad", comp: "worse than", sup: "the worst", category: "irregular" }
+            ]
+        };
+
+        // Level definitions
+        const LEVELS = [
+            { id: 1, name: "Level 1: Short & Simple", keys: ["level1"] },
+            { id: 2, name: "Level 2: Doubling & '-y'", keys: ["level2"] },
+            { id: 3, name: "Level 3: Long & Irregular", keys: ["level3"] },
+            { id: 4, name: "Level 4: Mixed Master", keys: ["level1", "level2", "level3"] }
+        ];
+
+        /* ----------------------------------------------------
+           2. AUDIO SYNTHESIZER (Web Audio API - No External Files)
+        ---------------------------------------------------- */
+        let audioEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            if (!audioEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') ctx.resume();
+
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                const now = ctx.currentTime;
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now); // A3
+                    osc.frequency.linearRampToValueAtTime(130.81, now + 0.2); // C3
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'win') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.setValueAtTime(554.37, now + 0.1);
+                    osc.frequency.setValueAtTime(659.25, now + 0.2);
+                    osc.frequency.setValueAtTime(880, now + 0.3);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                    osc.start(now);
+                    osc.stop(now + 0.5);
+                }
+            } catch (e) {
+                console.log("Audio play error:", e);
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const btn = document.getElementById('audio-btn');
+            btn.innerHTML = audioEnabled ? 
+                '<i class="fa-solid fa-volume-high text-sm"></i>' : 
+                '<i class="fa-solid fa-volume-xmark text-sm text-rose-500"></i>';
+        }
+
+        /* ----------------------------------------------------
+           3. GAME STATE MANAGEMENT
+        ---------------------------------------------------- */
+        let state = {
+            selectedLevel: 1,
+            currentMode: 'quest', // 'quest', 'builder', 'sentence'
+            score: 0,
+            streak: 0,
+            maxStreak: 0,
+            lives: 3,
+            currentQuestionIdx: 0,
+            totalQuestions: 10,
+            questions: [],
+            userAnswers: [], // { question, isCorrect, userAns, correctAns, rule }
+            timerInterval: null,
+            timeLeft: 100, // percentage for visual timer
+            timerSeconds: 15
+        };
+
+        // Initialize Level Buttons on Startup
+        function renderLevelButtons() {
+            const container = document.getElementById('level-buttons-container');
+            container.innerHTML = LEVELS.map(lvl => `
+                <button onclick="setLevel(${lvl.id})" id="btn-lvl-${lvl.id}"
+                    class="py-2.5 px-3 rounded-xl font-bold text-xs sm:text-sm border-2 transition-all text-center ${
+                        state.selectedLevel === lvl.id 
+                        ? 'bg-brand-purple text-white border-brand-purple shadow-md scale-105' 
+                        : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                    }">
+                    ${lvl.name}
+                </button>
+            `).join('');
+        }
+
+        function setLevel(lvlId) {
+            state.selectedLevel = lvlId;
+            renderLevelButtons();
+        }
+
+        function showScreen(screenId) {
+            document.getElementById('screen-mode-select').classList.add('hidden');
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-summary').classList.add('hidden');
+
+            document.getElementById(`screen-${screenId}`).classList.remove('hidden');
+        }
+
+        /* ----------------------------------------------------
+           4. QUESTION GENERATOR ENGINE
+        ---------------------------------------------------- */
+        function getActiveVocabPool() {
+            const lvlConfig = LEVELS.find(l => l.id === state.selectedLevel);
+            let pool = [];
+            lvlConfig.keys.forEach(k => {
+                pool = pool.concat(VOCAB_DATABASE[k]);
+            });
+            return pool;
+        }
+
+        function shuffleArray(arr) {
+            return [...arr].sort(() => Math.random() - 0.5);
+        }
+
+        function generateQuestions(mode) {
+            const pool = shuffleArray(getActiveVocabPool());
+            const questions = [];
+            const count = Math.min(10, pool.length);
+
+            for (let i = 0; i < count; i++) {
+                const item = pool[i];
+                if (mode === 'quest') {
+                    // Comparative or Superlative Quiz
+                    const isComparative = Math.random() > 0.5;
+                    const promptType = isComparative ? 'Comparative' : 'Superlative';
+                    const targetForm = isComparative ? item.comp : item.sup;
+                    
+                    // Generate distractors
+                    const options = [targetForm];
+                    
+                    // Add standard distractor errors
+                    if (isComparative) {
+                        options.push(`more ${item.base} than`);
+                        options.push(`${item.base}er than`);
+                        options.push(`${item.base}est than`);
+                    } else {
+                        options.push(`the most ${item.base}`);
+                        options.push(`the ${item.base}est`);
+                        options.push(`the ${item.base}er`);
+                    }
+
+                    // Clean duplicates & filter out weird ones if matched target
+                    const uniqueOptions = Array.from(new Set(options)).slice(0, 4);
+                    while (uniqueOptions.length < 4) {
+                        const randomOther = pool[Math.floor(Math.random() * pool.length)];
+                        const dummy = isComparative ? randomOther.comp : randomOther.sup;
+                        if (!uniqueOptions.includes(dummy)) uniqueOptions.push(dummy);
+                    }
+
+                    questions.push({
+                        type: 'mcq',
+                        baseItem: item,
+                        prompt: `What is the <span class="text-brand-purple font-extrabold uppercase">${promptType}</span> form of "<span class="underline decoration-wavy text-brand-orange">${item.base}</span>"?`,
+                        options: shuffleArray(uniqueOptions),
+                        correctAnswer: targetForm,
+                        ruleExplanation: getRuleExplanation(item)
+                    });
+                } else if (mode === 'builder') {
+                    // Match Base -> Comp -> Sup
+                    questions.push({
+                        type: 'builder',
+                        baseItem: item,
+                        prompt: `Complete the Adjective Family for: <span class="font-heading text-brand-purple text-2xl">${item.base}</span>`,
+                        correctComp: item.comp,
+                        correctSup: item.sup,
+                        ruleExplanation: getRuleExplanation(item)
+                    });
+                } else if (mode === 'sentence') {
+                    // Sentence Corrector Blitz
+                    const isComp = Math.random() > 0.5;
+                    let correctSentence = "";
+                    let wrongSentence = "";
+
+                    if (isComp) {
+                        correctSentence = `The blue car is ${item.comp} the red car.`;
+                        // Create plausible mistake
+                        if (item.category === 'long') {
+                            wrongSentence = `The blue car is ${item.base}er than the red car.`;
+                        } else if (item.category === 'ending-y') {
+                            wrongSentence = `The blue car is more ${item.base} than the red car.`;
+                        } else {
+                            wrongSentence = `The blue car is more ${item.base} than the red car.`;
+                        }
+                    } else {
+                        correctSentence = `This is ${item.sup} book in the library.`;
+                        if (item.category === 'long') {
+                            wrongSentence = `This is the ${item.base}est book in the library.`;
+                        } else {
+                            wrongSentence = `This is the most ${item.base} book in the library.`;
+                        }
+                    }
+
+                    const opts = shuffleArray([
+                        { text: correctSentence, isCorrect: true },
+                        { text: wrongSentence, isCorrect: false }
+                    ]);
+
+                    questions.push({
+                        type: 'sentence',
+                        baseItem: item,
+                        prompt: `Which sentence is grammatically <span class="text-brand-green font-bold uppercase">CORRECT</span>?`,
+                        options: opts,
+                        correctAnswer: correctSentence,
+                        ruleExplanation: getRuleExplanation(item)
+                    });
+                }
+            }
+            return questions;
+        }
+
+        function getRuleExplanation(item) {
+            switch(item.category) {
+                case 'short':
+                    return `Rule: Short adjectives add -er than / the -est. (${item.base} -> ${item.comp} / ${item.sup})`;
+                case 'ending-e':
+                    return `Rule: Adjectives ending in -e just add -r than / the -st. (${item.base} -> ${item.comp} / ${item.sup})`;
+                case 'double-consonant':
+                    return `Rule: Double the final consonant for short vowel + single consonant words! (${item.base} -> ${item.comp} / ${item.sup})`;
+                case 'ending-y':
+                    return `Rule: For -y endings, change -y to -ier than / the -iest! (${item.base} -> ${item.comp} / ${item.sup})`;
+                case 'long':
+                    return `Rule: 2-syllables (non -y) and 3+ syllables use "more ... than" and "the most ...".`;
+                case 'irregular':
+                    return `Rule: Irregular adjectives change form completely! (good -> better -> best / bad -> worse -> worst).`;
+                default:
+                    return `Remember to check the word length and ending!`;
+            }
+        }
+
+        /* ----------------------------------------------------
+           5. GAMEPLAY LOOP & RENDERERS
+        ---------------------------------------------------- */
+        function startGame(mode) {
+            state.currentMode = mode;
+            state.score = 0;
+            state.streak = 0;
+            state.maxStreak = 0;
+            state.lives = 3;
+            state.currentQuestionIdx = 0;
+            state.userAnswers = [];
+            state.questions = generateQuestions(mode);
+            state.totalQuestions = state.questions.length;
+
+            // UI Badges Update
+            document.getElementById('global-score').innerText = state.score;
+            document.getElementById('global-streak').innerText = '0x';
+            document.getElementById('current-q-num').innerText = '1';
+            document.getElementById('total-q-num').innerText = state.totalQuestions;
+
+            const modeNames = { quest: 'Tower Quest', builder: 'Adjective Builder', sentence: 'Sentence Blitz' };
+            document.getElementById('game-mode-badge').innerText = modeNames[mode];
+            document.getElementById('game-level-badge').innerText = LEVELS.find(l => l.id === state.selectedLevel).name;
+
+            renderLives();
+            showScreen('game');
+            loadQuestion();
+        }
+
+        function renderLives() {
+            const container = document.getElementById('lives-container');
+            let html = '';
+            for (let i = 0; i < 3; i++) {
+                if (i < state.lives) {
+                    html += `<i class="fa-solid fa-heart text-rose-500 text-lg"></i>`;
+                } else {
+                    html += `<i class="fa-regular fa-heart text-slate-300 text-lg"></i>`;
+                }
+            }
+            container.innerHTML = html;
+        }
+
+        function startTimer() {
+            clearInterval(state.timerInterval);
+            state.timeLeft = 100;
+            state.timerSeconds = 15;
+            const timerBar = document.getElementById('timer-bar');
+            
+            state.timerInterval = setInterval(() => {
+                state.timerSeconds -= 0.1;
+                state.timeLeft = (state.timerSeconds / 15) * 100;
+                timerBar.style.width = `${Math.max(0, state.timeLeft)}%`;
+
+                if (state.timeLeft < 30) {
+                    timerBar.className = "bg-rose-500 h-full transition-all duration-100";
+                } else {
+                    timerBar.className = "bg-brand-green h-full transition-all duration-100";
+                }
+
+                if (state.timerSeconds <= 0) {
+                    clearInterval(state.timerInterval);
+                    handleAnswer(null, true); // Timeout
+                }
+            }, 100);
+        }
+
+        function loadQuestion() {
+            hideFeedback();
+            startTimer();
+
+            const playArea = document.getElementById('play-area');
+            const q = state.questions[state.currentQuestionIdx];
+            document.getElementById('current-q-num').innerText = state.currentQuestionIdx + 1;
+
+            if (q.type === 'mcq') {
+                renderMCQ(playArea, q);
+            } else if (q.type === 'builder') {
+                renderBuilder(playArea, q);
+            } else if (q.type === 'sentence') {
+                renderSentence(playArea, q);
+            }
+        }
+
+        /* --- MCQ RENDERER --- */
+        function renderMCQ(container, q) {
+            container.innerHTML = `
+                <div class="space-y-6 text-center">
+                    <div class="text-xl sm:text-2xl text-slate-700 font-semibold leading-relaxed">
+                        ${q.prompt}
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto pt-2">
+                        ${q.options.map((opt, i) => `
+                            <button onclick="handleAnswer('${escapeQuotes(opt)}')" 
+                                class="bg-slate-50 hover:bg-purple-50 hover:border-brand-purple border-2 border-slate-200 text-slate-800 font-bold py-3.5 px-4 rounded-2xl text-base sm:text-lg transition-all shadow-sm text-center flex items-center justify-center space-x-2 btn-3d">
+                                <span>${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        /* --- BUILDER RENDERER --- */
+        function renderBuilder(container, q) {
+            // Generate option chips for comparative & superlative choices
+            const pool = getActiveVocabPool();
+            const compChoices = shuffleArray([q.correctComp, ...pool.slice(0, 3).map(p => p.comp)]).slice(0, 3);
+            const supChoices = shuffleArray([q.correctSup, ...pool.slice(0, 3).map(p => p.sup)]).slice(0, 3);
+
+            container.innerHTML = `
+                <div class="space-y-6 text-center max-w-xl mx-auto">
+                    <div class="text-lg text-slate-600">
+                        ${q.prompt}
+                    </div>
+
+                    <!-- Targets Box -->
+                    <div class="grid grid-cols-2 gap-4 my-4">
+                        <div class="bg-purple-50 border-2 border-dashed border-brand-purple rounded-2xl p-4 flex flex-col items-center justify-center min-h-[90px]">
+                            <span class="text-xs font-bold text-brand-purple uppercase mb-1">Comparative (+than)</span>
+                            <div id="target-comp" class="font-heading text-lg text-slate-800">Select below...</div>
+                        </div>
+                        <div class="bg-blue-50 border-2 border-dashed border-brand-blue rounded-2xl p-4 flex flex-col items-center justify-center min-h-[90px]">
+                            <span class="text-xs font-bold text-brand-blue uppercase mb-1">Superlative (the...)</span>
+                            <div id="target-sup" class="font-heading text-lg text-slate-800">Select below...</div>
+                        </div>
+                    </div>
+
+                    <!-- Selection Options -->
+                    <div class="space-y-3 text-left">
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase">1. Pick Comparative:</span>
+                            <div class="flex flex-wrap gap-2 mt-1" id="comp-options">
+                                ${compChoices.map(c => `
+                                    <button onclick="selectBuilderOption('comp', '${escapeQuotes(c)}')" class="builder-btn-comp bg-slate-100 hover:bg-purple-100 border border-slate-300 text-slate-700 px-3 py-2 rounded-xl text-sm font-bold">${c}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-slate-400 uppercase">2. Pick Superlative:</span>
+                            <div class="flex flex-wrap gap-2 mt-1" id="sup-options">
+                                ${supChoices.map(s => `
+                                    <button onclick="selectBuilderOption('sup', '${escapeQuotes(s)}')" class="builder-btn-sup bg-slate-100 hover:bg-blue-100 border border-slate-300 text-slate-700 px-3 py-2 rounded-xl text-sm font-bold">${s}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="submitBuilder('${escapeQuotes(q.correctComp)}', '${escapeQuotes(q.correctSup)}')" class="w-full bg-brand-green hover:bg-emerald-600 text-white font-heading py-3 rounded-xl btn-3d mt-2">
+                        Check Adjectives <i class="fa-solid fa-check ml-1"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        let selectedComp = null;
+        let selectedSup = null;
+
+        function selectBuilderOption(type, val) {
+            if (type === 'comp') {
+                selectedComp = val;
+                document.getElementById('target-comp').innerText = val;
+            } else {
+                selectedSup = val;
+                document.getElementById('target-sup').innerText = val;
+            }
+        }
+
+        function submitBuilder(correctComp, correctSup) {
+            if (!selectedComp || !selectedSup) {
+                showToast(false, "Incomplete!", "Please select both comparative and superlative forms first!");
+                return;
+            }
+            const isCorrect = (selectedComp === correctComp && selectedSup === correctSup);
+            handleAnswer(isCorrect ? correctComp : selectedComp, false, isCorrect);
+        }
+
+        /* --- SENTENCE BLITZ RENDERER --- */
+        function renderSentence(container, q) {
+            container.innerHTML = `
+                <div class="space-y-6 text-center max-w-xl mx-auto">
+                    <div class="text-xl text-slate-700 font-semibold">
+                        ${q.prompt}
+                    </div>
+                    <div class="space-y-3 pt-2">
+                        ${q.options.map(opt => `
+                            <button onclick="handleAnswer('${escapeQuotes(opt.text)}', false, ${opt.isCorrect})"
+                                class="w-full bg-slate-50 hover:bg-orange-50 hover:border-brand-orange border-2 border-slate-200 text-slate-800 font-bold p-4 rounded-2xl text-base sm:text-lg transition-all text-left flex items-center justify-between group btn-3d">
+                                <span>${opt.text}</span>
+                                <i class="fa-solid fa-circle-chevron-right text-slate-300 group-hover:text-brand-orange text-xl"></i>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        /* Utility to escape single quotes in JS string injections */
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        /* ----------------------------------------------------
+           6. ANSWER EVALUATION & FEEDBACK
+        ---------------------------------------------------- */
+        function handleAnswer(userSelected, isTimeout = false, explicitCorrect = null) {
+            clearInterval(state.timerInterval);
+            const q = state.questions[state.currentQuestionIdx];
+
+            let isCorrect = false;
+            if (explicitCorrect !== null) {
+                isCorrect = explicitCorrect;
+            } else if (!isTimeout && userSelected) {
+                isCorrect = (userSelected === q.correctAnswer);
+            }
+
+            // Record Answer for Review
+            state.userAnswers.push({
+                questionPrompt: q.prompt.replace(/<[^>]*>?/gm, ''), // strip HTML tags
+                userAns: isTimeout ? 'Timed Out' : userSelected,
+                correctAns: q.correctAnswer || `${q.correctComp} / ${q.correctSup}`,
+                isCorrect: isCorrect,
+                rule: q.ruleExplanation
+            });
+
+            if (isCorrect) {
+                playSound('correct');
+                state.score += 100 + (state.streak * 20); // Streak multiplier score
+                state.streak++;
+                if (state.streak > state.maxStreak) state.maxStreak = state.streak;
+
+                showToast(true, "Superb!", `${q.ruleExplanation}`);
+            } else {
+                playSound('wrong');
+                state.streak = 0;
+                state.lives--;
+                renderLives();
+
+                const errMsg = isTimeout ? "Time is up!" : `Correct answer: ${q.correctAnswer || (q.correctComp + ' / ' + q.correctSup)}`;
+                showToast(false, isTimeout ? "Out of Time!" : "Not Quite!", `${errMsg}<br><span class="text-xs opacity-90">${q.ruleExplanation}</span>`);
+            }
+
+            // Update Header HUD
+            document.getElementById('global-score').innerText = state.score;
+            document.getElementById('global-streak').innerText = `${state.streak}x`;
+
+            // Reset selection variables
+            selectedComp = null;
+            selectedSup = null;
+
+            // Check game end or next question
+            setTimeout(() => {
+                if (state.lives <= 0 || state.currentQuestionIdx + 1 >= state.totalQuestions) {
+                    endGame();
+                } else {
+                    state.currentQuestionIdx++;
+                    loadQuestion();
+                }
+            }, 2200);
+        }
+
+        function showToast(isCorrect, title, msg) {
+            const toast = document.getElementById('feedback-toast');
+            const icon = document.getElementById('feedback-icon');
+            const titleEl = document.getElementById('feedback-title');
+            const msgEl = document.getElementById('feedback-msg');
+
+            toast.className = `rounded-2xl p-4 card-shadow flex items-start space-x-3 transition-all ${
+                isCorrect ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'
+            }`;
+            icon.innerHTML = isCorrect ? '🌟' : '💡';
+            titleEl.innerText = title;
+            msgEl.innerHTML = msg;
+
+            toast.classList.remove('hidden');
+            toast.classList.add('pop-in');
+        }
+
+        function hideFeedback() {
+            document.getElementById('feedback-toast').classList.add('hidden');
+        }
+
+        /* ----------------------------------------------------
+           7. SUMMARY & REVIEW SCREEN
+        ---------------------------------------------------- */
+        function endGame() {
+            clearInterval(state.timerInterval);
+            playSound('win');
+
+            const correctCount = state.userAnswers.filter(a => a.isCorrect).length;
+            const accuracy = Math.round((correctCount / state.userAnswers.length) * 100) || 0;
+
+            document.getElementById('summary-score').innerText = state.score;
+            document.getElementById('summary-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('summary-streak').innerText = `${state.maxStreak}x`;
+
+            // Render Stars
+            const starsContainer = document.getElementById('stars-result');
+            if (accuracy >= 80) {
+                starsContainer.innerHTML = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>`;
+            } else if (accuracy >= 50) {
+                starsContainer.innerHTML = `<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>`;
+            } else {
+                starsContainer.innerHTML = `<i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>`;
+            }
+
+            // Render Mistakes & Review List
+            const reviewList = document.getElementById('review-list');
+            const mistakes = state.userAnswers.filter(a => !a.isCorrect);
+            document.getElementById('review-count-badge').innerText = `${mistakes.length} Need Review`;
+
+            if (state.userAnswers.length === 0) {
+                reviewList.innerHTML = `<p class="text-xs text-slate-400">No questions answered.</p>`;
+            } else {
+                reviewList.innerHTML = state.userAnswers.map((ans, idx) => `
+                    <div class="p-3 rounded-xl border ${ans.isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'} text-xs space-y-1">
+                        <div class="flex items-center justify-between font-bold">
+                            <span class="${ans.isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                                ${ans.isCorrect ? '<i class="fa-solid fa-circle-check mr-1"></i> Correct' : '<i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect'}
+                            </span>
+                            <span class="text-slate-400">Q${idx + 1}</span>
+                        </div>
+                        <p class="text-slate-700 font-medium">${ans.questionPrompt}</p>
+                        <p class="text-slate-600">Your answer: <b class="${ans.isCorrect ? 'text-emerald-600' : 'text-rose-600'}">${ans.userAns}</b></p>
+                        ${!ans.isCorrect ? `<p class="text-slate-600">Correct form: <b class="text-emerald-700">${ans.correctAns}</b></p>` : ''}
+                        <p class="text-slate-500 italic mt-0.5">${ans.rule}</p>
+                    </div>
+                `).join('');
+            }
+
+            showScreen('summary');
+        }
+
+        /* ----------------------------------------------------
+           8. GRAMMAR BANK MODAL
+        ---------------------------------------------------- */
+        function openGrammarBank() {
+            document.getElementById('modal-grammar').classList.remove('hidden');
+            document.getElementById('modal-grammar').classList.add('flex');
+        }
+
+        function closeGrammarBank() {
+            document.getElementById('modal-grammar').classList.add('hidden');
+            document.getElementById('modal-grammar').classList.remove('flex');
+        }
+
+        // Initialize App
+        window.onload = function() {
+            renderLevelButtons();
+        };
+    </script>
+</body>
+</html>
